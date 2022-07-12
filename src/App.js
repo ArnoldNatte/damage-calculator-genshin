@@ -1,23 +1,33 @@
-import logo from './logo.svg';
 import './App.css';
+import { useEffect, useState } from 'react';
+
+//import $ from "jquery";
+//import GenshinDb from "./genshindb-none";
+
+// `https://cdn.jsdelivr.net/gh/theBowja/genshin-db@main/dist/data/scripts/english-characters.js`
+
 
 function App() {
+
+  const [Ar, setAr] = useState("");
+
+  useEffect(() => {
+
+    fetch('https://cdn.jsdelivr.net/gh/theBowja/genshin-db@main/src/data/English/characters/lisa.json')
+    .then( response => response.text())
+    .then( resultText => {
+      setAr(JSON.parse(resultText));
+      //return console.log(JSON.parse(resultText)) 
+    })
+    .catch( err => console.log(err) );
+
+  }, []);
+
+
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      {Ar.name}
     </div>
   );
 }
