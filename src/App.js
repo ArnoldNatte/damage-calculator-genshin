@@ -1,9 +1,6 @@
 import './App.css';
 import { useEffect, useState } from 'react';
 
-//import $ from "jquery";
-//import GenshinDb from "./genshindb-none";
-
 // `https://cdn.jsdelivr.net/gh/theBowja/genshin-db@main/dist/data/scripts/english-characters.js`
 
 
