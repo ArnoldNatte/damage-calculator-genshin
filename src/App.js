@@ -3,7 +3,8 @@ import { useDispatch, useSelector } from "react-redux";
 
 import "./App.css";
 import Header from "./pages/header/header";
-import Home from "./pages/home/home";
+//import Home from "./pages/home/home";
+import DamagedCalculator from './pages/damage-calculator/damageCalculator';
 import Footer from "./pages/footer/footer";
 
 import { getCharacters } from './redux/actions/getCharacters/getCharacters-action';
@@ -43,7 +44,8 @@ function App() {
         {error && <div>* {error}</div>}
         {isLoading && <div>Cargando...</div>}
         <Header />
-        <Home />
+        <DamagedCalculator />
+        {/*<Home />*/}
         <Footer />
       </div>
   );
