@@ -9,12 +9,14 @@ const Home = ({numeroHomeComp, colores, pintarDelColor}) => {
             <h2>Esto es la pagina Home</h2>
             <p>Escoje que quieres hacer! {numeroHomeComp}</p>
 
+        {/*
             <div>{colores.map(x => (
                 <button onClick={() => pintarDelColor(x)} 
                 key={x.id}>
                     {x.color}
                 </button>
             ))}</div>
+            */}
 
         </div>
     );

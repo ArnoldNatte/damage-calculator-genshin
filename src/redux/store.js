@@ -1,7 +1,21 @@
 //  ****************************
 // Redux guia ******************
-import {createStore} from 'redux';
+import { createStore, applyMiddleware, compose } from 'redux';
+import thunk from 'redux-thunk';
+import allReducers from './reducers/rootReducers';
 
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+
+const store = createStore(
+    allReducers,
+    process.env.NODE_ENV === "production"
+        ? applyMiddleware(thunk)
+        : composeEnhancers(applyMiddleware(thunk))
+);
+
+export default store;
+
+/*
 const initialState = {
     numeroHome: 4,
     numeroHeader: 7,
@@ -28,7 +42,7 @@ const initialState = {
 
 const reducerApp = (state = initialState, action) => {
     if( action.type === "CAMBIAR_COLOR") {
-        console.log(action)
+        //console.log(action)
         return {
             ...state,
             colorElejido: action.color.color
@@ -38,5 +52,5 @@ const reducerApp = (state = initialState, action) => {
 }
 
 export default createStore(reducerApp);
-
+*/
 //  **************************** 
