@@ -4,10 +4,10 @@ import { LOADING_GETCHARACTERS, GET_GETCHARACTERS, ERROR_GETCHARACTERS } from '.
 
 const getCharactersService = new AppService();
 
-export const getCharacters = (aea) => {
+export const getCharacters = (toThisUrl) => {
     return dispatch => {
         dispatch(actionCreator(LOADING_GETCHARACTERS, "payload")(true));
-        getCharactersService.list(aea)
+        getCharactersService.list(toThisUrl)
         .then((data) => {
             dispatch(actionCreator(GET_GETCHARACTERS, "payload")(data));
             dispatch(actionCreator(LOADING_GETCHARACTERS, "payload")(false));

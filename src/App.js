@@ -1,53 +1,53 @@
+import "./App.css";
+import Header from "./pages/header/header";
+import Home from "./pages/home/home";
+//import DamagedCalculator from './pages/damage-calculator/damageCalculator';
+import Footer from "./pages/footer/footer";
+
+/*
 import { useEffect }  from 'react';
 import { useDispatch, useSelector } from "react-redux";
 
-import "./App.css";
-import Header from "./pages/header/header";
-//import Home from "./pages/home/home";
-import DamagedCalculator from './pages/damage-calculator/damageCalculator';
-import Footer from "./pages/footer/footer";
-
 import { getCharacters } from './redux/actions/getCharacters/getCharacters-action';
-
-// `https://cdn.jsdelivr.net/gh/theBowja/genshin-db@main/dist/data/scripts/english-characters.js`
+import { getImages } from './redux/actions/getImages/getImages-action';
+*/
 
 function App() {
-
   /*
-  const [Ar, setAr] = useState("");
-  useEffect(() => {
-    fetch('https://cdn.jsdelivr.net/gh/theBowja/genshin-db@main/src/data/index/English/characters.json')
-    .then( response => response.text())
-    .then( resultText => {
-      setAr(JSON.parse(resultText));
-      //return console.log(JSON.parse(resultText)) 
-    })
-    .catch( err => console.log(err) );
-  }, []);
-
-  */
-  
-  const isLoading = useSelector((state) => state.getCharactersReducer.isLoading);
-  const characters = useSelector((state) => state.getCharactersReducer.characters);
-  const error = useSelector((state) => state.getCharactersReducer.error);
   const dispatch = useDispatch();
+  //const isLoading = useSelector((state) => state.getCharactersReducer.isLoading);
+  //const error = useSelector((state) => state.getCharactersReducer.error);
+  const characters = useSelector((state) => state.getCharactersReducer.characters);
 
-  const aea = '/English/talents/amber.json';
-  console.log(characters);
+  const urlCharacters = '/index/English/characters.json';
+  const urlImages = '/image/characters.json';
+  const images = useSelector((state) => state.getImagesReducer.images);
 
+  if(images.length !== 0){
+    //console.log(images);
+  }
+  if(characters.length !== 0){
+    //console.log(characters);
+  }
+  
   useEffect(() => {
-    dispatch(getCharacters(aea))
+    dispatch(getCharacters(urlCharacters));
   }, [dispatch]);
 
+  useEffect(() => {
+    dispatch(getImages(urlImages));
+  }, [dispatch]);
+  */
   return (
-      <div className="App">
-        {error && <div>* {error}</div>}
+    <div className="App">
+      <Header />
+      {/*{error && <div>* {error}</div>}
         {isLoading && <div>Cargando...</div>}
-        <Header />
-        <DamagedCalculator />
-        {/*<Home />*/}
-        <Footer />
-      </div>
+        {//<DamagedCalculator datos={characters}/>
+        }*/}
+      <Home />
+      <Footer />
+    </div>
   );
 }
 

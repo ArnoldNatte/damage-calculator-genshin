@@ -7,9 +7,9 @@ export default class AppService {
         this.url = 'https://cdn.jsdelivr.net/gh/theBowja/genshin-db@main/src/data';
     }
 
-    async list(aea) {
+    async list(toThisUrl) {
         try {
-            return await axios.get(`${this.url}${aea}`);
+            return await axios.get(`${this.url}${toThisUrl}`);
         } catch (error) {
             throw error;
         }

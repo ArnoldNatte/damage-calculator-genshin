@@ -39,18 +39,5 @@ const initialState = {
     ],
     colorElejido: "red"
 }
-
-const reducerApp = (state = initialState, action) => {
-    if( action.type === "CAMBIAR_COLOR") {
-        //console.log(action)
-        return {
-            ...state,
-            colorElejido: action.color.color
-        }
-    }
-    return state;
-}
-
-export default createStore(reducerApp);
 */
 //  **************************** 
