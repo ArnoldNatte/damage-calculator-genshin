@@ -38,10 +38,9 @@ const DamageCalculator = () => {
       <h2>Damage Calculator page!</h2>
       <ul>
         {
-          arrData.map(pj => {
-            console.log(pj);
+          arrData.map((pj, index) => {
             return (
-              <li>
+              <li key={index}>
                 <img src={pj.images.icon} alt="img del pj" />
                 <span>{pj.nombre}</span>
               </li>
