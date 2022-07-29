@@ -1,20 +1,16 @@
-import React from 'react';
-import s from './header.module.css';
+import React from "react";
+import s from "./header.module.css";
+import { Link } from "react-router-dom";
 
-import { connect } from 'react-redux'
-
-// se pasa por parametro las props del objeto  
+// se pasa por parametro las props del objeto
 // que retorna la funcion mapStateToProps
-const Header = ({numHeader}) => {
-    return (
-        <header className={`${s.header}`}>
-            <h1>Esto es el Header {numHeader}</h1>
-        </header>
-    );
-}
+const Header = () => {
+  return (
+    <header className={`${s.header}`}>
+      <h1>Esto es el Header</h1>
+      <Link to="/">Go to home</Link>
+    </header>
+  );
+};
 
-const mapStateToProps = state => ({
-    numHeader: state.numeroHeader
-});
-
-export default connect(mapStateToProps, {})(Header);
+export default Header;

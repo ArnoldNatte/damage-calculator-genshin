@@ -1,15 +1,27 @@
 import React from "react";
-import BigCard from '../../components/BigCard/BigCard';
+import BigCard from "../../components/BigCard/BigCard";
 import s from "./home.module.css";
 
 //import {connect} from 'react-redux';
 
 const Home = () => {
+  const datosBigCards = {
+    toDamagedCalculator: {
+      description: "Go to Damage Calculator",
+      thisURL: "/damage-calculator",
+    },
+    toAboutMe: {
+      description: "About the Programmer",
+      thisURL: "/about",
+    },
+  };
+
   return (
     <section className={s.home}>
       <h2>Esto es la pagina Home</h2>
       <p>Escoje que quieres hacer!</p>
-      <BigCard />
+      <BigCard datos={datosBigCards.toDamagedCalculator} />
+      <BigCard datos={datosBigCards.toAboutMe} />
     </section>
   );
 };
