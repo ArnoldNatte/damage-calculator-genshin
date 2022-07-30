@@ -1,8 +1,10 @@
 import React from "react";
 import s from "./damageCalculator.module.css";
+import CharacterCard from "../../components/CharacterCard/CharacterCard";
+import CharactersOptions from "../../components/CharactersOptions/CharactersOptions";
 
 import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch, useSelector, shallowEqual } from "react-redux";
 
 import { getCharacters } from "../../redux/actions/getCharacters/getCharacters-action";
 import { getImages } from "../../redux/actions/getImages/getImages-action";
@@ -11,42 +13,48 @@ const DamageCalculator = () => {
   const dispatch = useDispatch();
   const urlCharacters = "/index/English/characters.json";
   const urlImages = "/image/characters.json";
-  const data = {
-    characters: useSelector((state) => state.getCharactersReducer.characters),
-    images: useSelector((state) => state.getImagesReducer.images),
-    isLoading: useSelector((state) => state.getCharactersReducer.isLoading),
-    error: useSelector((state) => state.getCharactersReducer.error),
-  };
+  const characters = useSelector(
+    (state) => state.getCharactersReducer.characters,
+    shallowEqual
+  );
+  //const charactersIsLoading = useSelector((state) => state.getCharactersReducer.isLoading, shallowEqual);
+  //const charactersError = useSelector((state) => state.getCharactersReducer.error, shallowEqual);
+  const images = useSelector(
+    (state) => state.getImagesReducer.images,
+    shallowEqual
+  );
+  //const imagesIsLoading = useSelector((state) => state.getImagesReducer.isLoading, shallowEqual);
+  //const imagesError = useSelector((state) => state.getImagesReducer.error, shallowEqual);
   useEffect(() => {
     dispatch(getCharacters(urlCharacters));
+  }, [dispatch]);
+  useEffect(() => {
     dispatch(getImages(urlImages));
   }, [dispatch]);
 
-  let arrData = [];
-  if (data.images.length !== 0 && data.characters.length !== 0) {
-    for (let pj in data.characters.namemap) {
-      arrData.push({
-        namemap: pj,
-        nombre: data.characters.namemap[pj],
-        images : data.images[pj]
-      })
+  const showCharacters = () => {
+    let charactersToShow = [];
+    let id = 0;
+    //images && console.log("img",images);
+    for (let x in characters.namemap) {
+      let img = images[x].icon;
+
+      //console.log(images[x].icon, x);
+
+      let el = <CharacterCard key={id} name={characters.namemap[x]} imagen={img} />;
+      charactersToShow.push(el);
+      id = id + 1;
+      //console.log("el", el);
     }
-  }
+    return <>{charactersToShow && charactersToShow.map((el) => el)}</>;
+  };
 
   return (
     <div className={s.damaged_calculator}>
       <h2>Damage Calculator page!</h2>
-      <ul>
-        {
-          arrData.map((pj, index) => {
-            return (
-              <li key={index}>
-                <img src={pj.images.icon} alt="img del pj" />
-                <span>{pj.nombre}</span>
-              </li>
-            )
-          })
-        }
+      <CharactersOptions />
+      <ul className={s.ctnerCards}>
+        {images.length !== 0 && showCharacters()}
       </ul>
     </div>
   );
