@@ -1,32 +1,38 @@
 import React from "react";
 
 const CharactersOptions = () => {
+
+  const getTipe = (e) => {
+    e.target.value && console.log(`Click a: ${e.target.value}`, e.target);
+    //alert(e.currentTarget.id)
+}
+
   return (
-    <div>
+    <div onClick={getTipe}>
       CharactersOptions:
       <span>
         Rareza:
-        <button>4*</button>
-        <button>5*</button>
+        <button value={4}>4*</button>
+        <button value={5}>5*</button>
         |
       </span>
       <span>
         Elemento:
-        <button>Pyro</button>
-        <button>Cryo</button>
-        <button>Electro</button>
-        <button>Anemo</button>
-        <button>Hydro</button>
-        <button>Geo</button>
+        <button value="Pyro">Pyro</button>
+        <button value="Cryo">Cryo</button>
+        <button value="Electro">Electro</button>
+        <button value="Anemo">Anemo</button>
+        <button value="Hydro">Hydro</button>
+        <button value="Geo">Geo</button>
         |
       </span>
       <span>
         Arma:
-        <button>Espada</button>
-        <button>Mandoble</button>
-        <button>Arco</button>
-        <button>Lanza</button>
-        <button>Catalizador</button>
+        <button value="Sword">Espada</button>
+        <button value="Claymore">Mandoble</button>
+        <button value="Bow">Arco</button>
+        <button value="Polearm">Lanza</button>
+        <button value="Catalyst">Catalizador</button>
       </span>
     </div>
   );

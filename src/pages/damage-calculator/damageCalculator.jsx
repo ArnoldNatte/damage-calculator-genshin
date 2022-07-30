@@ -33,19 +33,38 @@ const DamageCalculator = () => {
   }, [dispatch]);
 
   const showCharacters = () => {
+    //console.log(characters.categories["Sword"]);
+    //console.log(characters.names);
+    //console.log(characters.namemap);
+    let arrNames = [];
+    let arrNamesCopia = [];
+    for (let j in characters.namemap) {
+      arrNamesCopia.push(j);
+    }
+    let toChange = characters.categories["Geo"];
+    console.log("to change : ", toChange);
+    console.log("arrNames : ", arrNamesCopia);
+    arrNames = toChange;
+
     let charactersToShow = [];
     let id = 0;
-    //images && console.log("img",images);
-    for (let x in characters.namemap) {
-      let img = images[x].icon;
 
-      //console.log(images[x].icon, x);
-
-      let el = <CharacterCard key={id} name={characters.namemap[x]} imagen={img} />;
+    arrNames.map((a) => {
+      //console.log(a, characters.namemap[a]);
+      let img = images[a].icon;
+      //console.log(x);
+      let el = (
+        <CharacterCard
+          key={id * 1}
+          idN={id}
+          name={characters.namemap[a]}
+          imagen={img}
+        />
+      );
       charactersToShow.push(el);
-      id = id + 1;
-      //console.log("el", el);
-    }
+      id = (id + 1) * 1;
+    });
+    //console.log(charactersToShow);
     return <>{charactersToShow && charactersToShow.map((el) => el)}</>;
   };
 
