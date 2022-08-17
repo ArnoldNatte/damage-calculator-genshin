@@ -1,20 +1,33 @@
-import React from 'react';
-import s from './CharacterCard.module.css';
+import React, { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
 
-const CharacterCard = (props) => {
+import s from "./CharacterCard.module.css";
 
-    const pickCharacter = (e) => {
-        //console.log(`Click a: ${e.currentTarget.id}`, e.currentTarget);
-        alert(e.currentTarget.id)
-    }
+const CharacterCard = ({ data }) => {
+  //const [DataArr, setDataArr] = useState(null);
+  //const dispatch = useDispatch();
 
+  useEffect(() => {
+    //data.length !== 0 && console.log(data);
+  }, [data]);
 
-    return (
-        <div key={props.id} id={props.idN} className={s.ctner} onClick={pickCharacter}>
-            <img src={props.imagen} alt={`${props.name}_icon`} />
-            <p>{props.name}</p>
-        </div>
-    );
-}
+  const pickCharacter = () => {
+    //console.log(`Click a: ${e.currentTarget.id}`, e.currentTarget);
+    console.log(data.name);
+  };
+
+  return (
+    <li className={s.ctner} onClick={pickCharacter} id={data.id}>
+      {data.length !== 0 ? (
+        <>
+          <img src={data.image} alt="" />
+          <p>{data.name}</p>
+        </>
+      ) : (
+        <p>Cargando...</p>
+      )}
+    </li>
+  );
+};
 
 export default CharacterCard;

@@ -1,14 +1,33 @@
 import React from "react";
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector, shallowEqual } from "react-redux";
+
+import {characters_show} from '../../redux/actions/fetchsToAPI/fetchsToAPI-action';
 
 const CharactersOptions = () => {
 
-  const getTipe = (e) => {
-    e.target.value && console.log(`Click a: ${e.target.value}`, e.target);
-    //alert(e.currentTarget.id)
+  const [Pj, setPj] = useState("Bennett");  
+
+  const dispatch = useDispatch();
+
+  /*
+  useEffect(() => {
+    dispatch(characters_show(Pj));
+  }, [Pj]);*/
+  
+
+  const getType = (e) => {
+    //e.target.value && console.log(`Click a: ${e.target.value}`, e.target);
+    if(e.target.value){
+      setPj({type : e.target.value});
+    }
 }
 
   return (
-    <div onClick={getTipe}>
+    <div onClick={getType}>
       CharactersOptions:
       <span>
         Rareza:
@@ -37,5 +56,12 @@ const CharactersOptions = () => {
     </div>
   );
 };
+/*
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators(characterAction, dispatch);
+}
+
+export default connect(null, mapDispatchToProps)(CharactersOptions);
+*/
 
 export default CharactersOptions;

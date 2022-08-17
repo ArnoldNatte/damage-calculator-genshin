@@ -1,0 +1,7 @@
+.ctner {
+    background-color: tomato;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+

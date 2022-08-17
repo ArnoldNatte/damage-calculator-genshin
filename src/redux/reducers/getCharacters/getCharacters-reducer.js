@@ -5,7 +5,7 @@ const initialState = {
     isLoading: false,
     characters: [],
     status_code: null,
-    error: null
+    error: null,
 }
 
 const getCharactersReducer = {
