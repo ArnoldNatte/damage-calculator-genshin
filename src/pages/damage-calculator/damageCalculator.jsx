@@ -3,7 +3,7 @@ import s from "./damageCalculator.module.css";
 import CharactersOptions from "../../components/CharactersOptions/CharactersOptions";
 import CharactersCardsContainer from '../../components/CharactersCardsContainer/CharactersCardsContainer';
 
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { connect } from "react-redux";
 import {
   characters_fetchPetition,

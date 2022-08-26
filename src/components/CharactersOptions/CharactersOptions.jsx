@@ -1,67 +1,75 @@
 import React from "react";
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
+import { connect } from "react-redux";
 
-import { useEffect, useState } from "react";
-import { useDispatch, useSelector, shallowEqual } from "react-redux";
+import { useState, useEffect } from "react";
+import { useDispatch } from "react-redux";
 
-import {characters_show} from '../../redux/actions/fetchsToAPI/fetchsToAPI-action';
+import CharactersOptionSelected from "../../redux/actions/characterOptionSelected/characterOptionSelected-action";
+import s from "./CharactersOptions.module.css";
 
-const CharactersOptions = () => {
+const CharactersOptions = ({
+  characters,
+  CharactersOptionSelected,
+  categorieSelected,
+}) => {
+  const [Properties, setProperties] = useState(null);
+  //const dispatch = useDispatch();
 
-  const [Pj, setPj] = useState("Bennett");  
-
-  const dispatch = useDispatch();
-
-  /*
   useEffect(() => {
-    dispatch(characters_show(Pj));
-  }, [Pj]);*/
-  
+    //console.log(characters);
+    if (characters !== null) {
+      setProperties(characters.properties);
+    }
+  }, [characters]);
+
+  useEffect(() => {
+    return () => {
+      CharactersOptionSelected("");
+    };
+  }, []);
 
   const getType = (e) => {
-    //e.target.value && console.log(`Click a: ${e.target.value}`, e.target);
-    if(e.target.value){
-      setPj({type : e.target.value});
+    if (e.target.name !== undefined) {
+      if (e.target.name === categorieSelected) {
+        CharactersOptionSelected("");
+      } else {
+        CharactersOptionSelected(e.target.name);
+      }
     }
-}
+    //e.target.name && console.log(`Click a: ${e.target.name}`, e.target);
+    //console.log(e.target.name);
+  };
 
   return (
-    <div onClick={getType}>
+    <div onClick={getType} className={s.ctner}>
       CharactersOptions:
-      <span>
-        Rareza:
-        <button value={4}>4*</button>
-        <button value={5}>5*</button>
-        |
-      </span>
-      <span>
-        Elemento:
-        <button value="Pyro">Pyro</button>
-        <button value="Cryo">Cryo</button>
-        <button value="Electro">Electro</button>
-        <button value="Anemo">Anemo</button>
-        <button value="Hydro">Hydro</button>
-        <button value="Geo">Geo</button>
-        |
-      </span>
-      <span>
-        Arma:
-        <button value="Sword">Espada</button>
-        <button value="Claymore">Mandoble</button>
-        <button value="Bow">Arco</button>
-        <button value="Polearm">Lanza</button>
-        <button value="Catalyst">Catalizador</button>
-      </span>
+      {Properties !== null &&
+        Properties.element.map((t, index) => (
+          <button key={index} name={t}>
+            {t}
+          </button>
+        ))}
+      {Properties !== null &&
+        Properties.rarity.map((t, index) => (
+          <button key={index} name={t}>
+            {t}
+          </button>
+        ))}
+      {Properties !== null &&
+        Properties.weapontype.map((t, index) => (
+          <button key={index} name={t}>
+            {t}
+          </button>
+        ))}
     </div>
   );
 };
-/*
-function mapDispatchToProps(dispatch) {
-  return bindActionCreators(characterAction, dispatch);
-}
 
-export default connect(null, mapDispatchToProps)(CharactersOptions);
-*/
+const mapStateToProps = (state) => ({
+  characters: state.FetchsToAPI.characters.data,
+  categorieSelected: state.selectCategorie.categorieToShow,
+});
 
-export default CharactersOptions;
+export default connect(mapStateToProps, { CharactersOptionSelected })(
+  CharactersOptions
+);

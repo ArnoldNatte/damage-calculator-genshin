@@ -1,0 +1,1 @@
+export const OPTION_SELECTED = 'OPTION_SELECTED';

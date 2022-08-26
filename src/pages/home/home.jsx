@@ -1,6 +1,6 @@
 import React from "react";
 import BigCard from "../../components/BigCard/BigCard";
-import s from "./home.module.css";
+import s from "./home.module.scss";
 
 //import {connect} from 'react-redux';
 
@@ -20,8 +20,10 @@ const Home = () => {
     <section className={s.home}>
       <h2>Esto es la pagina Home</h2>
       <p>Escoje que quieres hacer!</p>
+      <div className={s.ctnerBigCards}>
       <BigCard datos={datosBigCards.toDamagedCalculator} />
       <BigCard datos={datosBigCards.toAboutMe} />
+      </div>
     </section>
   );
 };

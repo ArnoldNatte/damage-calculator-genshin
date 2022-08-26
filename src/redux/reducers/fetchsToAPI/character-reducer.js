@@ -12,7 +12,7 @@ const initialState = {
   },
   images: {
     data: null,
-    message: "",
+    message: "", 
   },
 };
 

@@ -1,5 +1,5 @@
 import React from "react";
-import s from "./header.module.css";
+import s from "./header.module.scss";
 import { Link } from "react-router-dom";
 
 // se pasa por parametro las props del objeto
@@ -7,8 +7,10 @@ import { Link } from "react-router-dom";
 const Header = () => {
   return (
     <header className={`${s.header}`}>
-      <h1>Esto es el Header</h1>
-      <Link to="/">Go to home</Link>
+      <h1>Home</h1>
+      <Link to="/">
+        <h2>Go to home</h2>
+      </Link>
     </header>
   );
 };

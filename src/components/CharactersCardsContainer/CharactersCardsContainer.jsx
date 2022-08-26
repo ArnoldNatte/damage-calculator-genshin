@@ -15,19 +15,29 @@ function getAtr(properties, cat, el) {
   return resp;
 }
 
-const CharactersCardsContainer = ({ characters, images }) => {
+const CharactersCardsContainer = ({
+  characters,
+  images,
+  categorieSelected,
+}) => {
   const [Data, setData] = useState(null);
 
   useEffect(() => {
     if (characters !== null && images !== null) {
-      console.log(characters, images);
+      //console.log(characters, images);
       let obj = {};
       let categories = characters.categories;
       let properties = characters.properties;
-      let arr = Object.values(characters.names);
-      //setCharactersToShow(arr);
-      let id = 1;
 
+      let arr = [];
+      if (categorieSelected === "") {
+        arr = Object.values(characters.names);
+        //console.log("> ",categorieSelected);
+        //arr = categories[categorieSelected];
+      } else {
+        arr = categories[categorieSelected];
+      }
+      let id = 1;
       arr.map((x) => {
         obj[x] = {
           name: characters.namemap[x],
@@ -38,15 +48,15 @@ const CharactersCardsContainer = ({ characters, images }) => {
           image: images[x].icon,
         };
       });
-      console.log(obj);
+      //console.log(obj);
       let array = [];
       for (let k in obj) {
         array.push(obj[k]);
       }
-      console.log(array);
+      //console.log(array);
       setData(array);
     }
-  }, [characters, images]);
+  }, [characters, images, categorieSelected]);
 
   return (
     <div className={s.ctner}>
@@ -61,6 +71,7 @@ const CharactersCardsContainer = ({ characters, images }) => {
 const mapStateToProps = (state) => ({
   characters: state.FetchsToAPI.characters.data,
   images: state.FetchsToAPI.images.data,
+  categorieSelected: state.selectCategorie.categorieToShow,
 });
 
 //export default CharactersCardsContainer;
